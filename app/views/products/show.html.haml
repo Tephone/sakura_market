@@ -5,16 +5,10 @@
   = @product.name
 %p
   %b Price:
-  = @product.price
+  = "#{@product.price}円"
 %p
   %b Description:
   = @product.description
-%p
-  %b Visible:
-  = @product.visible
-%p
-  %b Position:
-  = @product.position
 
 = link_to 'Edit', edit_product_path(@product)
 \|
