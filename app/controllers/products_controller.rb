@@ -3,8 +3,11 @@ class ProductsController < ApplicationController
 
   # GET /products or /products.json
   def index
-    @products = Product.all.order(:position == 1, position: 'ASC').order(created_at: 'DESC')
+    
+    # @products = Product.all.order(:position == 1, position: 'ASC').order(created_at: 'DESC')
     # @products = Product.all.order(position: 'ASC').order(created_at: 'DESC')
+    @products = Product.all.order('position ASC, updated_at DESC') 
+
 
   end
   # GET /products/1 or /products/1.json
