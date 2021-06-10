@@ -1,9 +1,12 @@
 class OrdersController < ApplicationController
+  def index
+    @orders = current_user.orders.order('created_at DESC')
+  end
+
   def new
-    @user = current_user
-    @order = @user.orders.build
+    @order = current_user.orders.build
     @product = Product.find(params[:product_id])
-    @order.order_products.build(product_id: @product.id, amount: 1, user_id: @user.id, order_id: @order.id)
+    @order.order_products.build(product: @product) #userなくてもできるのですか？どれか一つカラムのあたい取ればよし？
   end
   
   def create
