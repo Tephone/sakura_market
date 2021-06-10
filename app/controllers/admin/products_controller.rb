@@ -1,4 +1,5 @@
 class Admin::ProductsController < ApplicationController
+  before_action :admin_only
   before_action :set_product, only: %i[ show edit update destroy ]
 
   def index
@@ -56,5 +57,11 @@ class Admin::ProductsController < ApplicationController
 
     def product_params
       params.require(:product).permit(:name, :price, :description, :visible, :position)
+    end
+
+    def admin_only
+      unless current_user.admin?
+        redirect_to products_path
+      end
     end
 end
