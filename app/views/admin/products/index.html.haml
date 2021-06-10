@@ -1,19 +1,37 @@
-%h1 Listing admin_products
+- if user_signed_in?
+  = link_to "ログアウト", destroy_user_session_path, method: :delete
+  = link_to "購入履歴", orders_path
+- else
+  = link_to "新規登録", new_user_registration_path
+  = link_to "ログイン", new_user_session_path
+
+%h1 Listing products
 
 %table
   %thead
     %tr
+      %th Name
+      %th Price
+      %th Description
+      %th Visible
+      %th Position
       %th
       %th
       %th
 
   %tbody
-    - @admin_products.each do |admin_product|
-      %tr
-        %td= link_to 'Show', admin_product
-        %td= link_to 'Edit', edit_admin_product_path(admin_product)
-        %td= link_to 'Destroy', admin_product, method: :delete, data: { confirm: 'Are you sure?' }
+    - @products.each do |product|  
+      - if product.visible == true
+        %tr
+          %td= product.name
+          %td= "#{product.price} 円"
+          %td= product.description
+          %td= product.visible
+          %td= product.position
+-#           %td= link_to 'Show', product
+-#           %td= link_to 'Edit', edit_product_path(product)
+-#           %td= link_to 'Destroy', product, method: :delete, data: { confirm: 'Are you sure?' }
 
-%br
+-# %br
 
-= link_to 'New Product', new_admin_product_path
+-# = link_to 'New Product', new_product_path
